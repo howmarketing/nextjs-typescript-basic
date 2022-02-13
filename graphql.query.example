@@ -1,0 +1,107 @@
+
+// FETCH EXAMPLE
+
+fetch("http://localhost:1337/graphql", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrerPolicy": "no-referrer",
+  "body": "{\"operationName\":\"createVaultRecorder\",\"variables\":{},\"query\":\"mutation createVaultRecorder {\\n  createVaultRecorder(\\n    data: {account_id: \\\"graphql.testnet\\\", request_type: function_call, contract_id: \\\"graql.contract_id\\\", function_name: \\\"some function\\\", function_args: \\\"{\\\\\\\"Some_args\\\\\\\":\\\\\\\"with values\\\\\\\"}\\\", amount: \\\"1000000000000000000000000\\\", transaction_id: \\\"xxxxx\\\", request_extra_data: \\\"{\\\\\\\"all_json_data\\\\\\\":\\\\\\\"stringifyed\\\\\\\"}\\\", publishedAt: \\\"2022-02-11T13:10:20Z\\\"}\\n  ) {\\n    data {\\n      attributes {\\n        account_id: account_id\\n        request_type: request_type\\n        contract_id: contract_id\\n        function_name: function_name\\n        function_args: function_args\\n        amount: amount\\n        transaction_id: transaction_id\\n        request_extra_data: request_extra_data\\n        publishedAt: publishedAt\\n      }\\n    }\\n  }\\n}\\n\"}",
+  "method": "POST"
+}).then(d => d.json().then(response => {console.log(response)}));
+
+
+{"data":{"createVaultRecorder":{"data":{"attributes":{"account_id":"graphql.testnet","request_type":"function_call","contract_id":"graql.contract_id","function_name":"some function","function_args":"{\"Some_args\":\"with values\"}","amount":"1000000000000000000000000","transaction_id":"xxxxx","request_extra_data":"{\"all_json_data\":\"stringifyed\"}","publishedAt":"2022-02-11T13:10:20.000Z"}}}}}
+
+
+// GraphQl Types (createVaultRecorder)
+
+export interface Attribute {
+	account_id: string;
+	request_type: string;
+	contract_id: string;
+	function_name: string;
+	function_args: string;
+	amount: string;
+	transaction_id: string;
+	request_extra_data: string;
+	publishedAt: string;
+}
+
+export interface Data {
+	attributes: Attribute;
+}
+
+export interface CreateVaultRecorder {
+	data: Data;
+}
+
+export interface Data {
+	createVaultRecorder: CreateVaultRecorder;
+}
+
+export interface RootObject {
+	data: Data;
+}
+
+
+
+// FETCH EXAMPLE (QUERY)
+
+fetch("http://localhost:1337/graphql", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+    "content-type": "application/json",
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"98\", \"Google Chrome\";v=\"98\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"macOS\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin"
+  },
+  "referrerPolicy": "no-referrer",
+  "body": "{\"operationName\":\"getVaultRecorder\",\"variables\":{},\"query\":\"query getVaultRecorder {\\n  vaultRecorders {\\n    data {\\n      attributes {\\n        account_id: account_id\\n        request_type: request_type\\n        contract_id: contract_id\\n        function_name: function_name\\n        function_args: function_args\\n        amount: amount\\n        transaction_id: transaction_id\\n        request_extra_data: request_extra_data\\n        publishedAt: publishedAt\\n      }\\n    }\\n  }\\n}\\n\"}",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+}).then(d => d.json().then(response => {console.log(JSON.stringify(response))}));
+
+
+// GraphQl response interface (Query VaultRecorders)
+export interface Function_arg {
+	vault_contract_id: string;
+	amount: string;
+}
+
+export interface Data {}
+
+export interface Request_extra_data {
+	data: Data;
+}
+
+export interface Data {
+	attributes: {
+	    account_id: string;
+	    request_type: string;
+	    contract_id: string;
+	    function_name: string;
+	    function_args: Function_arg;
+	    amount: string;
+	    transaction_id: string;
+	    request_extra_data: Request_extra_data;
+	    publishedAt: string;
+    }
+}
+
+export interface VaultRecorder {
+	data: Data[];
+}

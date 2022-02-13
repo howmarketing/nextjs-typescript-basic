@@ -1,4 +1,38 @@
 
+
+// create
+
+// graphql
+
+# Write your query or mutation here
+mutation createVaultRecorder{
+  createVaultRecorder(data:{
+    account_id: "graphql.testnet",
+    request_type:function_call,
+    contract_id: "graql.contract_id",
+    function_name :"some function",
+    function_args: "{\"Some_args\":\"with values\"}",
+    amount:"1000000000000000000000000",
+    transaction_id: "xxxxx",
+    request_extra_data: "{\"all_json_data\":\"stringifyed\"}", 
+    publishedAt: "2022-02-11T13:10:20Z"
+  }){
+    data{
+      attributes{
+        account_id:account_id
+        request_type:request_type
+        contract_id:contract_id
+        function_name:function_name
+        function_args:function_args
+        amount:amount
+        transaction_id:transaction_id
+        request_extra_data:request_extra_data
+        publishedAt:publishedAt
+      }
+    }
+  }
+}
+
 // FETCH EXAMPLE
 
 fetch("http://localhost:1337/graphql", {
@@ -52,6 +86,27 @@ export interface RootObject {
 	data: Data;
 }
 
+// ======= query =========
+
+// graphql
+# Write your query or mutation here
+query getVaultRecorder {
+  vaultRecorders{
+    data{
+      attributes{
+      	account_id:account_id
+        request_type:request_type
+        contract_id:contract_id
+        function_name:function_name
+        function_args:function_args
+        amount:amount
+        transaction_id:transaction_id
+        request_extra_data:request_extra_data
+        publishedAt:publishedAt
+    	}
+  	}
+  }
+}
 
 
 // FETCH EXAMPLE (QUERY)

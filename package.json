@@ -1,6 +1,6 @@
 {
   "name": "front1",
-  "description": "develop branch",
+  "description": "staging branch",
   "private": true,
   "scripts": {
     "dev": "next dev",
